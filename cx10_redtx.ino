@@ -85,7 +85,7 @@ uint8_t throttle, rudder, elevator, aileron, rudder_trim, elevator_trim, aileron
 // setup initalises nrf24, attempts to bind, then moves on
 void setup() 
 {
- 
+  Serial.begin(115200);
   
   // Initialise SPI bus and activate radio in RX mode
   nrf24.init();
@@ -165,11 +165,31 @@ void loop()
   uint8_t aux1 = 0;
   
   // Get RX values by PPM, convert to range 0x00 to 0xFF
-  throttle = (uint8_t) (tx.getChannel(0, 1000, 2000, 0x00, 0xFF ));
+  /*throttle = (uint8_t) (tx.getChannel(0, 1000, 2000, 0x00, 0xFF ));
   aileron  = (uint8_t) (tx.getChannel(1, 1000, 2000, 0x00, 0xFF ));
   elevator = (uint8_t) (tx.getChannel(2, 1000, 2000, 0x00, 0xFF ));
   rudder   = (uint8_t) (tx.getChannel(3, 1000, 2000, 0x00, 0xFF ));
+  aux1     = (uint8_t) (tx.getChannel(4, 1000, 2000, 0x00, 0xFF ));*/
+  
+  throttle = (uint8_t) (tx.getChannel(2, 1000, 2000, 0x00, 0xFF ));
+  aileron  = (uint8_t) (tx.getChannel(0, 1000, 2000, 0x00, 0xFF ));
+  elevator = (uint8_t) (tx.getChannel(1, 1000, 2000, 0x00, 0xFF ));
+  rudder   = (uint8_t) (tx.getChannel(3, 1000, 2000, 0x00, 0xFF ));
   aux1     = (uint8_t) (tx.getChannel(4, 1000, 2000, 0x00, 0xFF ));
+  
+  if(false){
+      Serial.print("T:");
+      Serial.print(throttle);
+      Serial.print("\t A:"); 
+      Serial.print(aileron);
+      Serial.print("\t E:"); 
+      Serial.print(elevator);
+      Serial.print("\t R:"); 
+      Serial.print(rudder);
+      Serial.print("\t X:"); 
+      Serial.println(aux1); 
+      Serial.println("*********************************"); 
+  }
   
   // Add command values to trim to get real full scale response 
   // in original CX-10 firmware (FN firmware ignores the trims, so
