@@ -165,12 +165,7 @@ void loop()
   uint8_t aux1 = 0;
   
   // Get RX values by PPM, convert to range 0x00 to 0xFF
-  /*throttle = (uint8_t) (tx.getChannel(0, 1000, 2000, 0x00, 0xFF ));
-  aileron  = (uint8_t) (tx.getChannel(1, 1000, 2000, 0x00, 0xFF ));
-  elevator = (uint8_t) (tx.getChannel(2, 1000, 2000, 0x00, 0xFF ));
-  rudder   = (uint8_t) (tx.getChannel(3, 1000, 2000, 0x00, 0xFF ));
-  aux1     = (uint8_t) (tx.getChannel(4, 1000, 2000, 0x00, 0xFF ));*/
-  
+  // This bit of code needs to be replaced with a different input method, for example from serial port
   throttle = (uint8_t) (tx.getChannel(2, 1000, 2000, 0x00, 0xFF ));
   aileron  = (uint8_t) (tx.getChannel(0, 1000, 2000, 0x00, 0xFF ));
   elevator = (uint8_t) (tx.getChannel(1, 1000, 2000, 0x00, 0xFF ));
@@ -178,6 +173,7 @@ void loop()
   aux1     = (uint8_t) (tx.getChannel(4, 1000, 2000, 0x00, 0xFF ));
   
   if(false){
+      // for debug purposes
       Serial.print("T:");
       Serial.print(throttle);
       Serial.print("\t A:"); 
